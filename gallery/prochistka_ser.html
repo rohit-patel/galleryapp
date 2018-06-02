@@ -1,0 +1,259 @@
+﻿{% extends "base.html" %} 
+{% load fishca_tags thumbnail %}
+ {% load reit_tags %} 
+ {% load comments_tags %} {% load i18n %} {% load cache %} {% get_current_language as LANGUAGE_CODE %} {% block title %}{{ service.title }}{% endblock %} {% block description %}☎ (067)
+392-85-77 ★★★ {{ service.metaDesc }} ✔ отзывы ✔ цены ✉ mt_s@ukr.net{% endblock %} {% block keywords %}{{ service.metaKey }}{% endblock %} {% block soc %}
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:url" content="https://mtservice.kiev.ua{{request.path}}" />
+<meta property="og:image" content="https://mtservice.kiev.ua/static/img/logo.png" />
+<meta property="og:title" content="{{service.title}}" />
+<meta property="og:description" content="{{service.metadesc}}" /> {% endblock %} {% block content %}
+
+<div class="bred" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <span typeof="v:Breadcrumb"><a href="https://mtservice.kiev.ua/" rel="v:url" property="v:title">
+            Монтаж инженерных сетей №❶
+            
+        </a> ➤ 
+        </span>
+
+    <span typeof="v:Breadcrumb">
+
+        <a href="https://mtservice.kiev.ua{% url 'service_category' service.category.slug %}" rel="v:url" property="v:title">{{service.category.name}}</a> ➤ </span>
+
+
+    <span typeof="v:Breadcrumb">{{service.name}}</span>
+</div>
+<br />
+
+
+<h1 class="sub_title2 fadeInRight wow align_center">{{service.name|fw|safe}}</h1>
+
+<div class=" row sub_tel fadeInRight wow">
+    {{tel3|safe}} {{tel4|safe}} {{tel5|safe}}
+
+</div>
+
+{{service.top|safe}} {% if service.bunner %}
+
+
+
+
+<div class="vodoprovod" style="background-image:url({% thumbnail service.bunner 1120x380 crop %});">
+
+    <table class=" hidden-xs hidden-sm prem_voda fadeInLeft wow">
+        <tr>
+            <td class="align_center"><img alt="Прочистка канализации с гарантией" class="vi" src="/static/img/garant.png" /></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="prem_list">Аварийный выезд - 10 мин.</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="prem_list">Устраняем любой засор</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="prem_list">Даем гарантию</div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="ot_form dinamic_form ">
+        <div class="ot_head">
+            <i class="glyphicons calculator" data-name="calculator" data-type="" data-prefix="glyphicons" data-utf="E324"></i> Заказать выезд
+            <div class="small_str"> Перезвоним через 30 секунд</div>
+        </div>
+        <br/>
+        <div class="form_pros z1">
+            <div class="form_field">
+                <i class="glyphicons user" data-name="user" data-type="" data-prefix="glyphicons" data-utf="E004"></i>
+                <input type="text" class="form_name form-control" name="name" placeholder="Ваше имя" />
+            </div>
+
+            <div class="form_field">
+                <i class="glyphicons earphone" data-name="earphone" data-type="NEW IN 1.8" data-prefix="glyphicons" data-utf="E443"></i>
+                <input type="text" class="form_tel form-control" name="tel" placeholder="Ваш телефон" />
+            </div>
+
+
+            <input type="hidden" name="category" value="3">
+            <p class="form_field align_center">
+                <button class="btn3" onclick="send_form('z1');">Отправить</button>
+            </p>
+        </div>
+
+    </div>
+
+
+</div>
+
+<br/><br/> {% endif %}
+
+<br /> {% include 'include/typs.html' %}
+<br /> {% if price %}
+<div class="sub_title2 pri fadeInRight wow"><span>Наши</span> цены</div>
+<br/>
+
+<table class="price fadeInLeft wow width100">
+    <tr class="price_head">
+        <td class="hidden-xs width5">№</td>
+        <td class="width40" >Вид работ</td>
+        <td class="width20 hidden-xs">Единица измерения</td>
+        <td class="width20" >Цена в грн.</td>
+        <td class="width15" >Заказать</td>
+    </tr>
+    {% for p in price %}
+    <tr>
+        <td class="hidden-xs align_center">{{forloop.counter}}</td>
+        <td>{{p.name}}</td>
+        <td class="hidden-xs align_center"><b>{{p.ed.name}}</b></td>
+        <td class="sub_title5 align_center">{{p.price}}</td>
+        <td class="align_center"><button onclick="show_form('{{p.name}}');" class="btn4">Заказать</button></td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endif %}
+
+
+
+
+
+<div class="content-text">{{category.full_text|safe}}</div>
+
+
+
+
+
+<br />
+
+
+<br />
+<br />
+<div class="row ">
+    <div class="col-sm-5 col-xs-12">
+        <div class="ot_form fadeInLeft wow">
+            <div class="ot_head">
+                <i class="glyphicons direction form_der" data-name="user" data-type="" data-prefix="glyphicons" data-utf="E004"></i> Заказать выезд
+            </div>
+            <br/>
+            <div class="form_pros z2">
+                <div class="form_field">
+                    <i class="glyphicons user" data-name="user" data-type="" data-prefix="glyphicons" data-utf="E004"></i>
+                    <input type="text" class="form_name form-control" name="name" placeholder="Ваше имя" />
+                </div>
+
+                <div class="form_field">
+                    <i class="glyphicons earphone" data-name="earphone" data-type="NEW IN 1.8" data-prefix="glyphicons" data-utf="E443"></i>
+                    <input type="text" class="form_tel form-control" name="tel" placeholder="Ваш телефон" />
+                </div>
+
+                <div class="form_field">
+                    <i class="glyphicons pen" data-name="pen" data-type="" data-prefix="glyphicons" data-utf="E236"></i>
+                    <textarea name="text" placeholder="Описание"></textarea>
+                </div>
+                <input type="hidden" name="category" value="4">
+                <p class="form_field align_center">
+                    <button class="btn3" onclick="send_form('z2');">Отправить</button>
+                </p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="col-sm-7 col-xs-12">
+        <div class="sub_title3"><span>Почему</span> заказать выезд?</div>
+        <div class="sm_text"> Перезвоним через 30 секунд</div>
+        <br><br>
+        <table class="width100">
+            <tbody>
+                <tr>
+                    <td class="w100">
+                        <img alt="Быстро реагируем" src="/static/img/fast.png">
+                    </td>
+                    <td>
+                        <p class="prem_head">Моментальное реагирование</p>
+                        <p> Работаем 24/7, выезжаем сразу. </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w100">
+                        <img alt="Быстрый выезд" src="/static/img/i2_5nqMGiK.png">
+
+                    </td>
+                    <td>
+                        <p class="prem_head">Устраним любой засор</p>
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w100">
+                        <img alt="Гарантия качества" src="/static/img/i1_itQt4YQ.png">
+                    </td>
+                    <td>
+                        <p class="prem_head">Гарантируем качество</p>
+                        <p></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+
+        <div class="clearfix"></div>
+
+        <br />
+        <br /> 
+        {% include 'include/images.html' %}
+        <br />
+        <br />
+
+
+        <div class="content-text">{{service.full_text|safe}}</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% if works %} {% include 'include/works.html' %}
+        <br/><br/> {% endif %}
+        <br /> {% include 'include/karts.html' %}
+        <br /> {% if video %} {% include 'include/videos.html' %}
+        <br/><br/> {% endif %} {% comments 'service' 'Service' service.id %} {% reit 'service' 'Service' service.id service.reit service.votes %}
+
+
+
+
+        
+
+<div id="block_rating" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+<meta itemprop="bestRating" content="5">
+<meta itemprop="ratingValue" content="{{service.reit}}">
+
+<span class="rating_ball">{{service.reit}}</span>
+<span class="ratingCount" itemprop="ratingCount">{{service.count_votes}}</span>
+</div>
+
+
+
+
+        {% include 'include/services.html' %} {% endblock %}

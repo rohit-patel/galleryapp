@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load render_bundle from webpack_loader %}
+
+
+{% block content %}
+<div id="gallery"></div>
+
+{% endblock content %}
+
+
+
+{% block js %}
+{% render_bundle 'vendors' %}
+{% render_bundle 'Main' %}
+{% endblock js %}
